@@ -3,6 +3,8 @@ import Login from '../views/Login.vue';
 import Town from '../views/Town.vue';
 import CharSelect from '../views/CharSelect.vue';
 import CharCreate from '../views/CharCreate.vue';
+import Leaderboards from '../views/Leaderboards.vue';
+import Inventory from '../views/Inventory.vue';
 
 const routes = [
   {
@@ -11,17 +13,27 @@ const routes = [
     component: Login
   },
   {
-    path: '/town',
+    path: '/:charId/town',
     name: 'Town',
     component: Town
   },
   {
-    path: '/char-select',
+    path: '/:charId/leaderboards',
+    name: 'Leaderboards',
+    component: Leaderboards
+  },
+  {
+    path: '/:charId/inventory',
+    name: 'Inventory',
+    component: Inventory
+  },
+  {
+    path: '/charSelect',
     name: 'CharSelect',
     component: CharSelect
   },
   {
-    path: '/char-create',
+    path: '/charCreate',
     name: 'CharCreate',
     component: CharCreate
   }

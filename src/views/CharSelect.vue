@@ -44,6 +44,7 @@
                         <span class="value">{{ character.luck }}</span>
                     </div>
                 </div>
+                <button @click="select(character)">Select</button>
                 <button @click="remove(character)">Delete</button>
             </div>
         </div>
@@ -79,6 +80,9 @@ export default {
                 .get("/character/" + character.id + "/delete")
                 .then(() => this.getCharacters());
         },
+        select(character) {
+            this.$router.push({name: 'Town', params: {charId: character.id}});
+        }
     },
 };
 </script>
