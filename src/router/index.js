@@ -1,11 +1,23 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import { createRouter, createWebHashHistory } from 'vue-router';
+import Login from '../views/Login.vue';
+import Town from '../views/Town.vue';
+import CharSelect from '../views/CharSelect.vue';
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/town',
+    name: 'Town',
+    component: Town
+  },
+  {
+    path: '/char-select',
+    name: 'CharSelect',
+    component: CharSelect
   },
   {
     path: '/about',
