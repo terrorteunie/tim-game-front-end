@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>HelloVue3Cordova</name>
+  <name>Luceat</name>
   <description>
-        A sample Vue3 Cordova application that responds to the deviceready event.
+        Kei vette dikke game jonge
     </description>
   <author email="dev@dev.org" href="http://cordova.io">
-        Marco Chierchia
+        Timbino en TerrorTeun
     </author>
-  <content src="http://192.168.1.9:8080"/>
+  <content src="index.html"/>
   <access origin="*"/>
+  <preference name="Scheme" value="http"/>
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>

@@ -57,13 +57,7 @@ export default {
                         password: this.password,
                     })
                     .then((response) => {
-                        if (response.data.token) {
-                            localStorage.setItem("token", response.data.token);
-                            this.$router.push({name: 'CharSelect'});
-                        }
-                        if (response.data.error) {
-                            this.error = response.data.error;
-                        }
+                        this.handleResponse(response);
                     });
             }
         },
@@ -76,14 +70,17 @@ export default {
                         password: this.password,
                     })
                     .then((response) => {
-                        if (response.data.token) {
-                            localStorage.setItem("token", response.data.token);
-                            this.$router.push({name: 'CharSelect'});
-                        }
-                        if (response.data.error) {
-                            this.error = response.data.error;
-                        }
+                        this.handleResponse(response);
                     });
+            }
+        },
+        handleResponse(response) {
+            if (response.data.token) {
+                localStorage.setItem("token", response.data.token);
+                this.$router.push({name: 'CharSelect'});
+            }
+            if (response.data.error) {
+                this.error = response.data.error;
             }
         }
     },

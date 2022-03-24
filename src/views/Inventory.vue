@@ -15,7 +15,7 @@ export default {
     mounted() {
     },
     methods: {
-        goToSelect() {
+        goToTown() {
             this.$router.push({ name: "Town", params: this.$route.params });
         },
     },

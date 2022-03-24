@@ -6,7 +6,16 @@ if (token) {
     headers.Authorization = 'Bearer ' + token;
 }
 
-export default axios.create({
-    baseURL: 'http://localhost:8000/api',
+let axiosInstance = axios.create({
+    baseURL: 'http://autocrypt.nl/public/api',
     headers: headers
- });
+});
+axiosInstance.interceptors.request.use((config) => {
+    let token = localStorage.getItem('token');
+    if (token) {
+        config.headers['Authorization'] = 'Bearer ' + token;
+    }
+    return config;
+});
+
+export default axiosInstance;
