@@ -5,6 +5,7 @@ import CharSelect from '../views/CharSelect.vue';
 import CharCreate from '../views/CharCreate.vue';
 import Leaderboards from '../views/Leaderboards.vue';
 import Inventory from '../views/Inventory.vue';
+import Wilderness from '../views/Wilderness.vue';
 
 const routes = [
   {
@@ -26,6 +27,11 @@ const routes = [
     path: '/:charId/inventory',
     name: 'Inventory',
     component: Inventory
+  },
+  {
+    path: '/:charId/wilderness/:distance',
+    name: 'Wilderness',
+    component: Wilderness
   },
   {
     path: '/charSelect',

@@ -7,7 +7,7 @@ if (token) {
 }
 
 let axiosInstance = axios.create({
-    baseURL: 'http://autocrypt.nl/public/api',
+    baseURL: 'http://localhost:8000/api',
     headers: headers
 });
 axiosInstance.interceptors.request.use((config) => {
