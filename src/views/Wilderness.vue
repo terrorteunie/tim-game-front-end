@@ -1,7 +1,7 @@
 <template>
     <div class="wilderness">
         <h1>Wilderness</h1>
-        <button @click="goToTown">Town</button>
+        <button v-if="finished" @click="goToTown">Town</button>
         <br />
         <div
             class="next-event-container"
@@ -24,28 +24,7 @@ export default {
         return {
             charId: this.$route.params.charId,
             distance: this.$route.params.distance,
-            adventureLogs: [
-                {
-                    rarity: "Common",
-                    description: "Common event!\n Je hebt 10 gold gekregen",
-                },
-                {
-                    rarity: "Uncommon",
-                    description: "Uncommon event!\n Je hebt 50 gold gekregen",
-                },
-                {
-                    rarity: "Rare",
-                    description: "Rare event!\n Je hebt 250 gold gekregen",
-                },
-                {
-                    rarity: "Epic",
-                    description: "Epic event! \nJe hebt 750 gold gekregen",
-                },
-                {
-                    rarity: "Legendary",
-                    description: "Legendary event!\n Je hebt 2.500 gold gekregen",
-                },
-            ],
+            adventureLogs: [],
             currentEventIndex: -1,
             showNextEvent: true,
         };
@@ -59,7 +38,7 @@ export default {
                     this.distance
             )
             .then((response) => {
-                console.log(response.data);
+                this.adventureLogs = response.data;
             });
     },
     methods: {
@@ -75,6 +54,12 @@ export default {
         },
     },
     computed: {
+        finished() {
+            if (this.adventureLogs.length === 0) {
+                return false;
+            }
+            return !this.adventureLogs[this.currentEventIndex + 1];
+        },
         nextEventClass() {
             if (!this.showNextEvent || !this.adventureLogs[this.currentEventIndex + 1]) {
                 return "hide";
