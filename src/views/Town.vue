@@ -12,20 +12,29 @@
         <br />
         <button @click="showWildernessPopup = true">Wilderness</button>
     </div>
+    <character-tile v-if="character !== null" :character="character" />
 </template>
 
 <script>
 import WildernessPopup from "../components/WildernessPopup.vue";
+import CharacterTile from "../components/CharacterTile.vue";
 
 export default {
     name: "Town",
-    components: { WildernessPopup },
+    components: { WildernessPopup, CharacterTile },
     data() {
         return {
             showWildernessPopup: false,
+            character: null,
         };
     },
-    mounted() {},
+    mounted() {
+        this.$axios
+            .get("character/" + this.$route.params.charId + "/get")
+            .then((response) => {
+                this.character = response.data;
+            });
+    },
     methods: {
         goToSelect() {
             this.$router.push({ name: "CharSelect" });
@@ -48,7 +57,7 @@ export default {
                 name: "Wilderness",
                 params: {
                     ...this.$route.params,
-                    distance
+                    distance,
                 },
             });
         },
