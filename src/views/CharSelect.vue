@@ -37,7 +37,7 @@ export default {
         getCharacters() {
             this.$axios
                 .get("/character/getAll")
-                .then((response) => (this.characters = response.data));
+                .then((response) => (this.characters = response.data.filter((character) => !character.dead)));
         },
         create() {
             this.$router.push({ name: "CharCreate" });

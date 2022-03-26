@@ -1,14 +1,19 @@
 <template>
     <div class="wilderness">
         <h1>Wilderness</h1>
-        <button v-if="finished" @click="goToTown">Town</button>
+        <button v-if="finished && !characterDied" @click="goTo('Town')">
+            Town
+        </button>
+        <button v-if="finished && characterDied" @click="goTo('CharSelect')">
+            Character Select
+        </button>
         <br />
         <div
             class="next-event-container"
             :class="nextEventClass"
             @click="nextEvent"
         ></div>
-        <div class="log-container" :class="{'empty': hideLog}">
+        <div class="log-container" :class="{ empty: hideLog }">
             <div class="log-body">
                 {{ currentDescription }}
             </div>
@@ -27,6 +32,7 @@ export default {
             adventureLogs: [],
             currentEventIndex: -1,
             showNextEvent: true,
+            characterDied: false,
         };
     },
     mounted() {
@@ -38,12 +44,13 @@ export default {
                     this.distance
             )
             .then((response) => {
-                this.adventureLogs = response.data;
+                this.adventureLogs = response.data.logs;
+                this.characterDied = response.data.dead;
             });
     },
     methods: {
-        goToTown() {
-            this.$router.push({ name: "Town", params: this.$route.params });
+        goTo(route) {
+            this.$router.push({ name: route, params: this.$route.params });
         },
         nextEvent() {
             this.showNextEvent = false;
@@ -61,20 +68,23 @@ export default {
             return !this.adventureLogs[this.currentEventIndex + 1];
         },
         nextEventClass() {
-            if (!this.showNextEvent || !this.adventureLogs[this.currentEventIndex + 1]) {
+            if (
+                !this.showNextEvent ||
+                !this.adventureLogs[this.currentEventIndex + 1]
+            ) {
                 return "hide";
             }
             return this.adventureLogs[this.currentEventIndex + 1].rarity;
         },
         currentDescription() {
             if (!this.adventureLogs[this.currentEventIndex]) {
-                return '';
+                return "";
             }
             return this.adventureLogs[this.currentEventIndex].description;
         },
         hideLog() {
-            return this.currentDescription === '';
-        }
+            return this.currentDescription === "";
+        },
     },
 };
 </script>
@@ -112,7 +122,7 @@ export default {
         display: inline-block;
         margin-top: 75px;
         background-image: url("../assets/Worn-Parchment-BG-2.png");
-        background-repeat:  no-repeat;
+        background-repeat: no-repeat;
         background-size: contain;
         height: 206px;
         width: 310px;
