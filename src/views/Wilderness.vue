@@ -1,12 +1,17 @@
 <template>
     <div class="wilderness">
         <h1>Wilderness</h1>
-        <button v-if="finished && !characterDied" @click="goTo('Town')">
-            Town
-        </button>
-        <button v-if="finished && characterDied" @click="goTo('CharSelect')">
-            Character Select
-        </button>
+        <template v-if="character">
+            <button v-if="finished && !character.dead" @click="goTo('Town')">
+                Town
+            </button>
+            <button
+                v-if="finished && character.dead"
+                @click="goTo('CharSelect')"
+            >
+                Character Select
+            </button>
+        </template>
         <br />
         <div
             class="next-event-container"
@@ -32,7 +37,7 @@ export default {
             adventureLogs: [],
             currentEventIndex: -1,
             showNextEvent: true,
-            characterDied: false,
+            character: null,
         };
     },
     mounted() {
@@ -45,7 +50,8 @@ export default {
             )
             .then((response) => {
                 this.adventureLogs = response.data.logs;
-                this.characterDied = response.data.dead;
+                this.character = response.data.character;
+                this.$store.commit('setCharacter', this.character);
             });
     },
     methods: {

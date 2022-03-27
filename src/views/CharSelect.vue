@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import CharacterTile from '../components/CharacterTile.vue';
+import CharacterTile from "../components/CharacterTile.vue";
 
 export default {
     name: "CharSelect",
     components: {
-        CharacterTile
+        CharacterTile,
     },
     data() {
         return {
@@ -35,9 +35,13 @@ export default {
     },
     methods: {
         getCharacters() {
-            this.$axios
-                .get("/character/getAll")
-                .then((response) => (this.characters = response.data.filter((character) => !character.dead)));
+            this.$axios.get("/character/getAll").then((response) => {
+                let characters = response.data.filter(
+                    (character) => !character.dead
+                );
+                this.$store.commit('setCharacters', characters);
+                this.characters = this.$store.state.characters;
+            });
         },
         create() {
             this.$router.push({ name: "CharCreate" });
@@ -48,8 +52,11 @@ export default {
                 .then(() => this.getCharacters());
         },
         select(character) {
-            this.$router.push({name: 'Town', params: {charId: character.id}});
-        }
+            this.$router.push({
+                name: "Town",
+                params: { charId: character.id },
+            });
+        },
     },
 };
 </script>

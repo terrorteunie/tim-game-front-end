@@ -12,7 +12,11 @@
         <br />
         <button @click="showWildernessPopup = true">Wilderness</button>
     </div>
-    <character-tile v-if="character !== null" :character="character" />
+    <character-tile
+        v-if="character !== null"
+        :character="character"
+        show-attributes="true"
+    />
 </template>
 
 <script>
@@ -29,11 +33,9 @@ export default {
         };
     },
     mounted() {
-        this.$axios
-            .get("character/" + this.$route.params.charId + "/get")
-            .then((response) => {
-                this.character = response.data;
-            });
+        this.character = this.$store.getters.getCharacter(
+            this.$route.params.charId
+        );
     },
     methods: {
         goToSelect() {

@@ -43,6 +43,9 @@
             <button @click="$emit('select', character)">Select</button>
             <button @click="$emit('remove', character)">Delete</button>
         </template>
+        <template v-if="character.attribute_points_left > 0 && showAttributes">
+            <button @click="goToAssign()">Assign Attributes</button>
+        </template>
     </div>
 </template>
 
@@ -51,9 +54,7 @@ export default {
     name: "CharacterTile",
     components: {},
     data() {
-        return {
-            characters: [],
-        };
+        return {};
     },
     props: {
         character: {
@@ -62,13 +63,21 @@ export default {
         showButtons: {
             default: false,
         },
+        showAttributes: {
+            default: false
+        }
     },
+    methods: {
+        goToAssign() {
+            this.$router.push({name: 'AssignAttributes', params: {'charId': this.character.id}})
+        }
+    }
 };
 </script>
 
 <style scoped lang="scss">
 .character {
-    width: calc(50% - 22px);
+    width: calc(100% - 22px);
     height: 200px;
     box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
     border: 1px solid black;

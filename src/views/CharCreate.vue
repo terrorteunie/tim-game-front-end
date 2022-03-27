@@ -30,7 +30,7 @@
                 <button @click="decreaseLuck">-</button>
             </div>
         </div>
-        <span>Stat points left: {{ pointsLeft }}</span>
+        <span>Attribute points left: {{ pointsLeft }}</span>
 
         <div class="buttons">
             <button @click="create">Create</button>
@@ -50,7 +50,7 @@ export default {
             dexterity: 3,
             intelligence: 3,
             luck: 3,
-            totalPoints: 20
+            totalPoints: 16
         };
     },
     methods: {
