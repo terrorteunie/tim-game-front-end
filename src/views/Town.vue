@@ -9,6 +9,7 @@
         <button @click="goToSelect">Select character</button>
         <button @click="goToLeaderboards">Leaderboards</button>
         <button @click="goToInventory">Inventory</button>
+        <button @click="healFromInn">Inn</button>
         <br />
         <button @click="showWildernessPopup = true">Wilderness</button>
     </div>
@@ -52,6 +53,16 @@ export default {
                 name: "Leaderboards",
                 params: this.$route.params,
             });
+        },
+        healFromInn() {
+            this.$axios
+                .get("/character/" + this.character.id + "/healFromInn")
+                .then((response) => {
+                    this.$store.commit("setCharacter", response.data);
+                    this.character = this.$store.getters.getCharacter(
+                        this.$route.params.charId
+                    );
+                });
         },
         ventureOut(distance) {
             this.showWildernessPopup = false;
