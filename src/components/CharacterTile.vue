@@ -77,11 +77,16 @@ export default {
 
 <style scoped lang="scss">
 .character {
-    width: calc(100% - 22px);
-    height: 200px;
-    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
-    border: 1px solid black;
+    width: calc(100% - 70px);
+    height: 235px;
     margin: 10px;
+    padding: 25px;
+    background-image: url(/img/Worn-Parchment-BG-2.2b386f75.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    h3 {
+        margin: 5px 0 5px 0;
+    }
     .stats {
         display: flex;
         flex-wrap: wrap;

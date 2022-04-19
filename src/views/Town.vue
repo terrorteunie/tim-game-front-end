@@ -5,19 +5,50 @@
         @venture="ventureOut($event)"
     />
     <div class="town">
-        <h1>Town</h1>
-        <button @click="goToSelect">Select character</button>
-        <button @click="goToLeaderboards">Leaderboards</button>
-        <button @click="goToInventory">Inventory</button>
-        <button @click="healFromInn">Inn</button>
-        <br />
-        <button @click="showWildernessPopup = true">Wilderness</button>
+        <character-tile
+            class="character-tile"
+            v-if="character !== null"
+            :character="character"
+            show-attributes="true"
+        />
+        <div class="buttons">
+            <div class="button" @click="goToSelect">
+                <img
+                    src="../assets/button-background.png"
+                    class="image-button"
+                />
+                <span>Select character</span>
+            </div>
+            <div class="button" @click="goToLeaderboards">
+                <img
+                    src="../assets/button-background.png"
+                    class="image-button"
+                />
+                <span>Leaderboards</span>
+            </div>
+            <div class="button" @click="goToInventory">
+                <img
+                    src="../assets/button-background.png"
+                    class="image-button"
+                />
+                <span>Inventory</span>
+            </div>
+            <div class="button" @click="healFromInn">
+                <img
+                    src="../assets/button-background.png"
+                    class="image-button"
+                />
+                <span>Inn</span>
+            </div>
+            <div class="button" @click="showWildernessPopup = true">
+                <img
+                    src="../assets/button-background-special.png"
+                    class="image-button"
+                />
+                <span class="wilderness">Wilderness</span>
+            </div>
+        </div>
     </div>
-    <character-tile
-        v-if="character !== null"
-        :character="character"
-        show-attributes="true"
-    />
 </template>
 
 <script>
@@ -80,5 +111,36 @@ export default {
 
 <style scoped lang="scss">
 .town {
+    height: 100%;
+    background-image: url("../assets/town-background-2.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    .buttons {
+        margin-top: auto;
+        .button {
+            position: relative;
+            display: inline-block;
+            margin: 10px;
+            .image-button {
+                width: 165px;
+            }
+            span {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                font-weight: bold;
+                width: 100%;
+                color: white;
+                font-size: 20px;
+                -webkit-text-stroke: 1px black;
+                &.wilderness {
+                    top: calc(50% - 5px);
+                }
+            }
+        }
+    }
 }
 </style>

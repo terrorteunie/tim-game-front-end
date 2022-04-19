@@ -1,6 +1,5 @@
 <template>
     <div class="wilderness">
-        <h1>Wilderness</h1>
         <template v-if="character">
             <button v-if="finished && !character.dead" @click="goTo('Town')">
                 Town
@@ -99,6 +98,8 @@ export default {
 .wilderness {
     background-image: url("../assets/Cartoon_Forest_BG_03.png");
     height: 100%;
+    background-size: cover;
+    background-position: center;
     .next-event-container {
         background-size: contain;
         width: 120px;

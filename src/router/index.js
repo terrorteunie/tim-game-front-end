@@ -63,7 +63,8 @@ router.beforeEach((to, from, next) => {
         return;
     }
     if (store.getters.getCharacters.length === 0 && to.name !== 'CharSelect') {
-        next({ name: 'CharSelect' })
+        next({ name: 'CharSelect' });
+        return;
     }
     next();
 })
